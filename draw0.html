@@ -1,0 +1,20 @@
+<p id='xaccel'>x-accel</p>
+<p id='yaccel'>y-accel</p>
+<p id='zaccel'>z-accel</p>
+
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script>
+
+	// client created on localhost (do not need ngrok)
+    var ws = new WebSocket('ws://localhost:40610');
+
+    ws.onopen = function () {
+       console.log('websocket is connected ...')
+       ws.send('connected')
+    }
+    ws.onmessage = function (ev) {
+        console.log(ev);
+        $('#xaccel').text (ev.data)
+    }
+</script>
+

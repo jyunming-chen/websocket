@@ -1,0 +1,27 @@
+<h1>
+    File to read iPad Motion
+</h1>
+<hr>
+<p id='log'></p>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script>
+
+    // ngrok: port 40610 of localhost
+    // by "ngrok http 40610"
+    
+	var ws = new WebSocket('ws://9e7e5e2f.ngrok.io');
+
+	ws.onopen = function () {
+		console.log('websocket is connected ...')
+	    ws.send('connected')
+	}
+	
+	// only send x-acceleration for demo purpose
+	window.addEventListener('devicemotion', function(event) {
+		 $('#log').text ( event.acceleration.x.toPrecision(4) + ' m/s2');
+		 ws.send (event.acceleration.x.toPrecision(4)) 
+	});
+
+</script>
+
+
